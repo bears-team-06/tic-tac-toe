@@ -12,7 +12,6 @@ class Game {
 
     get isPlayer1Turn() {
         this.switch = !this.switch;
-        console.log(this.switch)
         return this.switch;
     }
 }

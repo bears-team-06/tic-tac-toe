@@ -5,7 +5,7 @@ class Board {
     numberOfMoves;
 
     constructor() {
-        this.boardCells = Array(3).fill(Array(3).fill(0)); // this will create array of size 3 X 3 with 0s
+        this.boardCells = new Array(3).fill(new Array(3).fill(0));
         this.winningMoves = null;
         this.numberOfMoves = 0;
     }
@@ -46,8 +46,20 @@ class Board {
                 hasWonInCrossDiagonal = this.boardCells[counter][2-counter] === playerMark;
             }
         }
-        this.winningMoves = [0,1,2]; //FIXME Need to find a way to get winning moves
-        return hasWonInRow || hasWonInColumn || hasWonInCrossDiagonal || hasWonInCrossDiagonal;
+        if (hasWonInRow) {
+            this.winningMoves = [0,1,2].map(rowNumber => this._getCellIDFrom(rowNumber, column));
+            return true;
+        } else if(hasWonInColumn) {
+            this.winningMoves = [0,1,2].map(columnNumber => this._getCellIDFrom(row, columnNumber));
+            return true;
+        } else if (hasWonInDiagonal) {
+            this.winningMoves = [0, 4, 8];
+            return true;
+        } else {
+            this.winningMoves = [2, 4, 6];
+            return true;
+        }
+        return false;
     }
 
     _getCellPositionInRowAndColumn(cellID) {
@@ -57,5 +69,9 @@ class Board {
             row,
             column
         }
+    }
+
+    _getCellIDFrom(row, column) {
+
     }
 }
