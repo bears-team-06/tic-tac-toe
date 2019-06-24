@@ -5,7 +5,10 @@ class Board {
     numberOfMoves;
 
     constructor() {
-        this.boardCells = new Array(3).fill(new Array(3).fill(0));
+        this.boardCells = new Array();
+        const rows = 3;
+        for (let i = 0; i < rows; i++)
+            this.boardCells[i] = new Array(0, 0, 0);
         this.winningMoves = null;
         this.numberOfMoves = 0;
     }
@@ -19,7 +22,7 @@ class Board {
         }
         let didCurrentPlayerWin = this._hasPlayerWonAfterMove({row, column}, player.playerMark);
         if(didCurrentPlayerWin) {
-            return player.playerMark === PlayerMark["1"] ? GameStatus.player1Won : GameStatus.player2Won;
+            return player.playerMark === PlayerMark[1] ? GameStatus.player1Won : GameStatus.player2Won;
         } else {
             if(this.moveMade < 8) {
                 return GameStatus.draw;
@@ -30,20 +33,24 @@ class Board {
     }
 
     _hasPlayerWonAfterMove({row, column}, playerMark) {
-        let hasWonInRow = false;
-        let hasWonInColumn = false;
-        let hasWonInDiagonal = false;
-        let hasWonInCrossDiagonal = false;
+        let hasWonInRow = true;
+        let hasWonInColumn = true;
         let shouldCheckDiagonally = column === row;
+        let hasWonInDiagonal = shouldCheckDiagonally;
         let shouldCheckCrossDiagonally = column + row === 2;
+        let hasWonInCrossDiagonal = shouldCheckCrossDiagonally;
         for(let counter = 0; counter < 3; counter++) {
-            hasWonInRow = this.boardCells[counter][column] === playerMark;
-            hasWonInColumn = this.boardCells[row][counter] === playerMark;
-            if(shouldCheckDiagonally) {
-                hasWonInDiagonal = this.boardCells[counter][counter] === playerMark;
+            if(this.boardCells[row][counter] !== playerMark){
+                hasWonInRow = false;
             }
-            if(shouldCheckCrossDiagonally) {
-                hasWonInCrossDiagonal = this.boardCells[counter][2-counter] === playerMark;
+            if(this.boardCells[counter][column] !== playerMark) {
+                hasWonInColumn = false;
+            }
+            if(shouldCheckDiagonally && this.boardCells[counter][counter] !== playerMark) {
+                hasWonInDiagonal = false;
+            }
+            if(shouldCheckCrossDiagonally && this.boardCells[counter][2-counter] !== playerMark) {
+                hasWonInCrossDiagonal = false;
             }
         }
         if (hasWonInRow) {
@@ -55,7 +62,7 @@ class Board {
         } else if (hasWonInDiagonal) {
             this.winningMoves = [0, 4, 8];
             return true;
-        } else {
+        } else if(hasWonInCrossDiagonal){
             this.winningMoves = [2, 4, 6];
             return true;
         }
@@ -63,8 +70,11 @@ class Board {
     }
 
     _getCellPositionInRowAndColumn(cellID) {
-        let row = parseInt(cellID / 3);
-        let column = cellID - row * 3;
+        //FIXME  Bug in how the cell is incorrectly assigned
+        // let row = parseInt(cellID / 3);
+        // let column = cellID - row * 3;
+        let column = parseInt(cellID / 3);
+        let row = cellID - column * 3;
         return {
             row,
             column

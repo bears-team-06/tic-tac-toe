@@ -40,7 +40,7 @@ function makeScreenUnTappable() {
 
 function resetGame() {
   initializeView();
-  initializeGame();
+  initializeGameModel();
 }
 
 function addClickListenersToCells() {

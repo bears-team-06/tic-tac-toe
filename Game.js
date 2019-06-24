@@ -2,7 +2,7 @@ class Game {
     board;
     player1;
     player2;
-    switch = true;
+    switch = false;
 
     constructor(player1, player2) {
         this.board = new Board();

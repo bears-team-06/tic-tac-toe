@@ -43,10 +43,10 @@ function getWinningArray() {
 function getGameResultString(gameResult) {
   let gameResultString;
   switch (gameResult) {
-    case GameStatus.player1:
+    case GameStatus.player1Won:
       gameResultString = "Player 1 Won!!!";
       break;
-    case GameStatus.player2:
+    case GameStatus.player2Won:
       gameResultString = "Player 2 Won!!!";
       break;
     case GameStatus.draw:
@@ -58,10 +58,10 @@ function getGameResultString(gameResult) {
 
 function updatePlayerScore(gameStatus) {
   switch (gameStatus) {
-    case GameStatus.player1:
+    case GameStatus.player1Won:
       game.player1.incrementScore();
       break;
-    case GameStatus.player2:
+    case GameStatus.player2Won:
         game.player2.incrementScore();
       break;
   }
