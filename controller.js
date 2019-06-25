@@ -2,6 +2,7 @@ function initializeGame() {
   initializeSeries();
   startGame();
 }
+
 initializeGame();
 
 function startGame() {
@@ -12,9 +13,8 @@ function startGame() {
 function cellTapped(event) {
   const gridNumber = event.target.id;
   const player = whoseTurnNext();
-  event.target.classList.add(player == players.player1 ? "zero" : "cross");
-  aMoveMade(player, gridNumber);
-  const gameStatus = getGameResultStatus(player);
+  event.target.classList.add(player.playerSymbol);
+  const gameStatus = aMoveMade(player, gridNumber);
   if (gameStatus != GameStatus.notEnded) {
     endGame(gameStatus);
   } else {
@@ -40,7 +40,7 @@ function makeScreenUnTappable() {
 
 function resetGame() {
   initializeView();
-  initializeGame();
+  initializeGameModel();
 }
 
 function addClickListenersToCells() {

@@ -1,4 +1,23 @@
 # Tic-Tac-Toe
+Tic tac toe is a paper pencil two player game. Each player can take up a sign X or 0 and mark their sign on 3 by 3 grid. Each player gets a turn to mark their sign
+on any one cell and turn is passed to second player. Whichever player is able to mark signs in connecting cells first wins. If none of the players are able to mark 
+signs on connecting cells then game ends with draw. For [more info](https://en.wikipedia.org/wiki/Tic-tac-toe)
+
+
+## Features supported in implementation
+1. Two player game
+2. Play against computer - TBD
+3. Play in a series - TBD
+4. Timer - TBD
+5. Undo Button - TBD
+6. Select a sign of choice - TBD
+
+ 
+
+
+## System Design - TBD
+
+
 ## Tools Used
 Javascript, Jquery, Bootsrap, HTML and CSS
 ## VARIABLE, OBJECTS AND CONSTANT IN TIC TAC TOE GAME
