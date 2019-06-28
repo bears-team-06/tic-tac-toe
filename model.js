@@ -1,68 +1,68 @@
-//FIXME - Valyes not needed - player1moves, player2moves, winningCombinations
-// FIXME
-
 const GameStatus = {
-  draw: 0,
-  player1Won: 1,
-  player2Won: 2,
-  notEnded: -1
+    draw: 0,
+    player1Won: 1,
+    player2Won: 2,
+    notEnded: -1
 };
 
-let game;
-let series;
 
-function initializeGameModel() {
-  game = new Game(series.player1, series.player2);
-}
+class TicTacToeModel {
+    game;
+    series;
 
-function getScoreForPlayerP1() {
-  return game.player1.playerScore;
-}
+    constructor() {
+        this.series = new Series();
+        this.initializeGameModel();
+    }
 
-function getScoreForPlayerP2() {
-    return game.player2.playerScore;
-}
+    initializeGameModel() {
+        this.game = new Game(this.series.player1, this.series.player2);
+    }
 
-function initializeSeries() {
-  series = new Series();
-  initializeGameModel();
-}
+    get player1Score() {
+        return this.game.player1.playerScore;
+    }
 
-function whoseTurnNext() {
-  return game.isPlayer1Turn ? game.player1 : game.player2;
-}
+    get player2Score() {
+        return this.game.player2.playerScore;
+    }
 
-function aMoveMade(player, gridNumber) {
-  return game.board.moveMade(player, gridNumber)
-}
+    get nextTurn() {
+        return this.game.isPlayer1Turn ? this.game.player1 : this.game.player2;
+    }
 
-function getWinningArray() {
-  return game.board.winningMoves;
-}
+    aMoveMade = (player, gridNumber) => {
+        return this.game.board.moveMade(player, gridNumber)
+    }
 
-function getGameResultString(gameResult) {
-  let gameResultString;
-  switch (gameResult) {
-    case GameStatus.player1Won:
-      gameResultString = "Player 1 Won!!!";
-      break;
-    case GameStatus.player2Won:
-      gameResultString = "Player 2 Won!!!";
-      break;
-    case GameStatus.draw:
-      gameResultString = "Game Draw";
-      break;
-  }
-  return gameResultString;
-}
+    get winningMoves() {
+        return this.game.board.winningMoves;
+    }
 
-function updatePlayerScore(gameStatus) {
-  switch (gameStatus) {
-    case GameStatus.player1Won:
-      game.player1.incrementScore();
-      break;
-    case GameStatus.player2Won:
-        game.player2.incrementScore();
-      break;
-  }
+    getGameResultString = (gameResult) => {
+        let gameResultString;
+        switch (gameResult) {
+            case GameStatus.player1Won:
+                gameResultString = "Player 1 Won!!!";
+                break;
+            case GameStatus.player2Won:
+                gameResultString = "Player 2 Won!!!";
+                break;
+            case GameStatus.draw:
+                gameResultString = "Game Draw";
+                break;
+        }
+        return gameResultString;
+    }
+
+    updatePlayerScore = (gameStatus) => {
+        switch (gameStatus) {
+            case GameStatus.player1Won:
+                this.game.player1.incrementScore();
+                break;
+            case GameStatus.player2Won:
+                this.game.player2.incrementScore();
+                break;
+        }
+    }
 }
