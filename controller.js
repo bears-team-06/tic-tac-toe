@@ -1,20 +1,17 @@
-function initializeGame() {
-  initializeSeries();
-  startGame();
-}
-
-initializeGame();
+model = new TicTacToeModel();
 
 function startGame() {
   addClickListenersToCells();
-  displayScores(getScoreForPlayerP1(), getScoreForPlayerP2());
+  displayScores(model.player1Score, model.player2Score);
 }
+
+startGame();
 
 function cellTapped(event) {
   const gridNumber = event.target.id;
-  const player = whoseTurnNext();
+  const player = model.nextTurn;
   event.target.classList.add(player.playerSymbol);
-  const gameStatus = aMoveMade(player, gridNumber);
+  const gameStatus = model.aMoveMade(player, gridNumber);
   if (gameStatus != GameStatus.notEnded) {
     endGame(gameStatus);
   } else {
@@ -23,11 +20,11 @@ function cellTapped(event) {
 }
 
 function endGame(gameStatus) {
-  displayWinningMoves(getWinningArray());
+  displayWinningMoves(model.winningMoves);
   displayGameResult(gameStatus);
   makeScreenUnTappable();
-  updatePlayerScore(gameStatus);
-  displayScores(getScoreForPlayerP1(), getScoreForPlayerP2());
+  model.updatePlayerScore(gameStatus);
+  displayScores(model.player1Score, model.player2Score);
 }
 
 function displayWinningMoves(winningArray) {
@@ -40,7 +37,8 @@ function makeScreenUnTappable() {
 
 function resetGame() {
   initializeView();
-  initializeGameModel();
+  model.initializeGameModel();
+  startGame();
 }
 
 function addClickListenersToCells() {
@@ -53,7 +51,7 @@ function displayScores(player1Score, player2Score) {
 }
 
 function displayGameResult(gameResult) {
-  $('.gameResult h1').text(getGameResultString(gameResult));
+  $('.gameResult h1').text(model.getGameResultString(gameResult));
   $('.gameResult').css("display", "block");
 }
 
