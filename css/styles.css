@@ -20,10 +20,16 @@ body {
 .board {
   width: 600px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   height: 80%;
   align-self: center;
   font-size: 10rem;
+}
+
+.first-col, .second-col, .third-col {
+  display: flex;
+  flex-direction: row;
 }
 
 .square {
@@ -75,32 +81,6 @@ body {
 .winning-moves {
   background: rgba(255, 255, 255, .8);
   color: #fffeec;
-}
-
-.first-col .square:nth-child(1), .first-col .square:nth-child(2), .first-col .square:nth-child(3) {
-  border-left: none;
-  border-right: none;
-}
-
-.second-col .square:nth-child(1), .second-col .square:nth-child(2), .second-col .square:nth-child(3) {
-  border-right: none;
-}
-
-.third-col .square:nth-child(1), .third-col .square:nth-child(2), .third-col .square:nth-child(3) {
-  border-right: none;
-}
-
-.first-col .square:nth-child(1), .second-col .square:nth-child(1), .third-col .square:nth-child(1) {
-  border-bottom: none;
-  border-top: none;
-}
-
-.first-col .square:nth-child(2), .second-col .square:nth-child(2), .third-col .square:nth-child(2) {
-  border-bottom: none;
-}
-
-.first-col .square:nth-child(3), .second-col .square:nth-child(3), .third-col .square:nth-child(3) {
-  border-bottom: none;
 }
 
 .replay {

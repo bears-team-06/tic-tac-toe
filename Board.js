@@ -70,11 +70,8 @@ class Board {
     }
 
     _getCellPositionInRowAndColumn(cellID) {
-        //FIXME  Bug in how the cell is incorrectly assigned
-        // let row = parseInt(cellID / 3);
-        // let column = cellID - row * 3;
-        let column = parseInt(cellID / 3);
-        let row = cellID - column * 3;
+        let row = parseInt(cellID / 3);
+        let column = cellID - row * 3;
         return {
             row,
             column
